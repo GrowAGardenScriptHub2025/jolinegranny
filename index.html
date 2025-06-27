@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Joline Granny Collection</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f8f9fa;
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+      overflow-x: hidden;
+    }
+    #page-content.blurred {
+      filter: blur(6px);
+      pointer-events: none;
+      user-select: none;
+      transition: filter 0.3s ease;
+    }
+    header {
+      width: 100%;
+      max-width: 1200px;
+      padding: 20px 0;
+      border-bottom: 2px solid #1db954;
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #1db954;
+      letter-spacing: 2px;
+      user-select: none;
+      margin-bottom: 40px;
+    }
+    .top-bar {
+      width: 100%;
+      max-width: 1200px;
+      display: flex;
+      justify-content: flex-start;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    #date-time {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 1.3rem;
+      color: #555;
+      user-select: none;
+      letter-spacing: 2px;
+      flex-grow: 1;
+    }
+    .hit-button {
+      background-color: #1db954;
+      color: white;
+      border: none;
+      padding: 8px 16px;
+      font-size: 0.9rem;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 4px 8px rgb(29 185 84 / 0.3);
+      user-select: none;
+    }
+    .hit-button:hover {
+      background-color: #17a34a;
+      transform: scale(1.05);
+    }
+    .nft-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+      width: 100%;
+      max-width: 1200px;
+      margin-bottom: 40px;
+    }
+    .nft-item {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgb(0 0 0 / 0.08);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 15px;
+      user-select: none;
+    }
+    .nft-item:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 16px 32px rgb(0 0 0 / 0.12);
+    }
+    .nft-image {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+    .nft-label {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #333;
+      text-align: center;
+    }
+    .modal-overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.7);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .modal-content {
+      background: white;
+      border-radius: 15px;
+      max-width: 90vw;
+      max-height: 90vh;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      position: relative;
+      user-select: none;
+      overflow: hidden;
+    }
+    .modal-image {
+      max-width: 100%;
+      max-height: 70vh;
+      border-radius: 12px;
+      object-fit: contain;
+      margin-bottom: 20px;
+      user-select: none;
+      pointer-events: none;
+    }
+    .modal-close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 2rem;
+      font-weight: bold;
+      color: #555;
+      cursor: pointer;
+      user-select: none;
+      transition: color 0.3s ease;
+    }
+    .modal-close:hover {
+      color: #1db954;
+    }
+    .download-button {
+      background-color: #1db954;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 1.1rem;
+      border-radius: 30px;
+      cursor: pointer;
+      box-shadow: 0 5px 12px rgb(29 185 84 / 0.5);
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      user-select: none;
+      text-decoration: none;
+      display: inline-block;
+    }
+    .download-button:hover {
+      background-color: #17a34a;
+      transform: scale(1.05);
+    }
+  </style>
+</head>
+<body>
+  <div class="top-bar" id="page-content">
+    <div id="date-time">Loading time...</div>
+    <button class="hit-button" onclick="window.location.href='smoke.html'">Take A Hit</button>
+    <button class="hit-button" onclick="window.location.href='upload.html'">File Uploader</button>
+    <button class="hit-button" onclick="window.location.href='game.html'">PLAY</button>
+  </div>
+
+  <header>Joline Granny Collection</header>
+
+  <main id="page-content">
+    <div class="nft-grid">
+      <div class="nft-item" data-img="https://i.imgur.com/1e0mfRR.png" data-name="Joline Granny 1">
+        <img src="https://i.imgur.com/1e0mfRR.png" class="nft-image" />
+        <div class="nft-label">Joline Granny 1</div>
+      </div>
+      <div class="nft-item" data-img="https://i.imgur.com/lAhzlYi.jpeg" data-name="Joline Granny 2">
+        <img src="https://i.imgur.com/lAhzlYi.jpeg" class="nft-image" />
+        <div class="nft-label">Joline Granny 2</div>
+      </div>
+      <div class="nft-item" data-img="https://i.imgur.com/v9rHsU8.jpeg" data-name="Joline Granny 3">
+        <img src="https://i.imgur.com/v9rHsU8.jpeg" class="nft-image" />
+        <div class="nft-label">Joline Granny 3</div>
+      </div>
+      <div class="nft-item" data-img="https://i.imgur.com/64XVTMX.jpeg" data-name="Joline Granny 4">
+        <img src="https://i.imgur.com/64XVTMX.jpeg" class="nft-image" />
+        <div class="nft-label">Joline Granny 4</div>
+      </div>
+      <div class="nft-item" data-img="https://i.imgur.com/c9cjZKz.jpeg" data-name="Joline Granny 5">
+        <img src="https://i.imgur.com/c9cjZKz.jpeg" class="nft-image" />
+        <div class="nft-label">Joline Granny 5</div>
+      </div>
+      <div class="nft-item" data-img="https://i.imgur.com/N44cthp.png" data-name="Joline Granny 6">
+        <img src="https://i.imgur.com/N44cthp.png" class="nft-image" />
+        <div class="nft-label">Joline Granny 6</div>
+      </div>
+      <div class="nft-item" data-img="https://i.imgur.com/ultzG2d.png" data-name="Joline Granny 7">
+        <img src="https://i.imgur.com/ultzG2d.png" class="nft-image" />
+        <div class="nft-label">Joline Granny 7</div>
+      </div>
+      <div class="nft-item" data-img="https://i.imgur.com/zWgYtyI.png" data-name="Joline Granny 8">
+        <img src="https://i.imgur.com/zWgYtyI.png" class="nft-image" />
+        <div class="nft-label">Joline Granny 8</div>
+      </div>
+      <div class="nft-item" data-img="https://i.imgur.com/WAsqkEk.png" data-name="Joline Granny 9">
+        <img src="https://i.imgur.com/WAsqkEk.png" class="nft-image" />
+        <div class="nft-label">Joline Granny 9</div>
+      </div>
+      <div class="nft-item" data-img="https://i.imgur.com/3EbKOWT.png" data-name="Joline Granny 10">
+        <img src="https://i.imgur.com/3EbKOWT.png" class="nft-image" />
+        <div class="nft-label">Joline Granny 10</div>
+      </div>
+      <div class="nft-item" data-img="https://i.imgur.com/TIHJ729.png" data-name="Joline Granny 11">
+        <img src="https://i.imgur.com/TIHJ729.png" class="nft-image" />
+        <div class="nft-label">Joline Granny 11</div>
+      </div>
+    </div>
+  </main>
+
+  <audio id="nft-audio" src="https://audio.jukehost.co.uk/6LPZ6NLDIASGPPnm53KsVP3XYk0GppkH" loop autoplay></audio>
+
+  <div id="modalOverlay" class="modal-overlay">
+    <div class="modal-content">
+      <button class="modal-close">&times;</button>
+      <img id="modalImage" src="" class="modal-image" />
+      <a id="downloadBtn" href="#" class="download-button" download>Download</a>
+    </div>
+  </div>
+
+  <script>
+    const audio = document.getElementById('nft-audio');
+    audio.volume = 0.2;
+
+    function updateDateTime() {
+      const now = new Date();
+      const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      const timeString = now.toLocaleTimeString('en-US', { timeZone: userTimeZone, hour12: false });
+      document.getElementById('date-time').textContent = timeString;
+    }
+
+    setInterval(updateDateTime, 1000);
+    updateDateTime();
+
+    function openModal(src, name) {
+      document.getElementById('modalImage').src = src;
+      document.getElementById('downloadBtn').href = src;
+      document.getElementById('downloadBtn').setAttribute('download', name);
+      document.getElementById('modalOverlay').classList.add('active');
+      document.getElementById('page-content').classList.add('blurred');
+    }
+
+    document.querySelectorAll('.nft-item').forEach(item => {
+      item.addEventListener('click', () => {
+        openModal(item.dataset.img, item.dataset.name);
+      });
+    });
+
+    document.querySelector('.modal-close').onclick = () => {
+      document.getElementById('modalOverlay').classList.remove('active');
+      document.getElementById('page-content').classList.remove('blurred');
+    };
+  </script>
+</body>
+</html>
